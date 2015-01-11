@@ -5,6 +5,35 @@
 // If you used to define your CONFIG_APM_HARDWARE setting here, it is no longer
 // valid! You should switch to using a HAL_BOARD flag in your local config.mk.
 
+// Select Megapirate board type:
+#define MPNG_BOARD_TYPE   CRIUS_V1
+/*
+  RCTIMER_CRIUS_V2    -- (DEFAULT!!!) Use ONLY for RCTimer CRIUS V2 board
+  CRIUS_V1            -- RCTimer CRIUS V1(1.1) board and all HobbyKing AIOP boards
+  HK_RED_MULTIWII_PRO -- HobbyKing MultiWii Pro RED board with ITG3205 and BMA180, BMP085 sensors
+  BLACK_VORTEX
+  MULTIWII_PRO_EZ3_BLACK  -- ReadyToFlyQuads - MultiWii PRO Ez3.0 Blacked MAG Editon Flight Controller w/ GPS Option (NO COMPASS)
+  PARIS_V5_OSD            -- PARIS v5 Mega iOSD - http://www.multiwiicopter.com/products/multiwii-paris-v5-mega-iosd-gps-autopilot
+ */
+
+// GPS port speed (Serial2) 38400 by default
+#define SERIAL2_BAUD 57600
+
+// GPS driver selection
+#define GPS_PROTOCOL GPS_PROTOCOL_NMEA
+/*
+	GPS_PROTOCOL_AUTO   (Default)
+	GPS_PROTOCOL_NONE
+	GPS_PROTOCOL_NMEA
+	GPS_PROTOCOL_SIRF
+	GPS_PROTOCOL_UBLOX
+	GPS_PROTOCOL_IMU
+	GPS_PROTOCOL_MTK
+	GPS_PROTOCOL_HIL
+	GPS_PROTOCOL_MTK19
+*/
+
+
 #define FRAME_CONFIG QUAD_FRAME
 /*
  *  options:

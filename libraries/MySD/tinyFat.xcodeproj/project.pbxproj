@@ -1,0 +1,98 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		CDE9F8BC1A50A33700199660 /* FatStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FatStructs.h; sourceTree = "<group>"; };
+		CDE9F8BD1A50A3B300199660 /* SdFat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SdFat.h; sourceTree = "<group>"; };
+		CDE9F8BE1A50A42500199660 /* SdInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SdInfo.h; sourceTree = "<group>"; };
+		CDE9F8BF1A50A4F000199660 /* Sd2Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sd2Card.h; sourceTree = "<group>"; };
+		CDE9F8C21A50A68E00199660 /* SdVolume.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SdVolume.cpp; sourceTree = "<group>"; };
+		CDE9F8C41A50AACA00199660 /* SdFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SdFile.cpp; sourceTree = "<group>"; };
+		CDE9F8C51A50B26A00199660 /* Sd2Card.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sd2Card.cpp; sourceTree = "<group>"; };
+		CDE9F8C71A50BF9F00199660 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
+		CDE9F8CB1A50D2C100199660 /* MySD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MySD.cpp; sourceTree = "<group>"; };
+		CDE9F8CC1A50D2C100199660 /* MySD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySD.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		CD54250C1A4B3F3200B71B87 = {
+			isa = PBXGroup;
+			children = (
+				CDE9F8CB1A50D2C100199660 /* MySD.cpp */,
+				CDE9F8CC1A50D2C100199660 /* MySD.h */,
+				CDE9F8C71A50BF9F00199660 /* File.cpp */,
+				CDE9F8BB1A50A31100199660 /* Utility */,
+			);
+			sourceTree = "<group>";
+		};
+		CDE9F8BB1A50A31100199660 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CDE9F8BC1A50A33700199660 /* FatStructs.h */,
+				CDE9F8BD1A50A3B300199660 /* SdFat.h */,
+				CDE9F8BE1A50A42500199660 /* SdInfo.h */,
+				CDE9F8BF1A50A4F000199660 /* Sd2Card.h */,
+				CDE9F8C51A50B26A00199660 /* Sd2Card.cpp */,
+				CDE9F8C21A50A68E00199660 /* SdVolume.cpp */,
+				CDE9F8C41A50AACA00199660 /* SdFile.cpp */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		CD54250D1A4B3F3200B71B87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = CD5425101A4B3F3200B71B87 /* Build configuration list for PBXProject "tinyFat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD54250C1A4B3F3200B71B87;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		CD5425111A4B3F3200B71B87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		CD5425121A4B3F3200B71B87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD5425101A4B3F3200B71B87 /* Build configuration list for PBXProject "tinyFat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5425111A4B3F3200B71B87 /* Debug */,
+				CD5425121A4B3F3200B71B87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD54250D1A4B3F3200B71B87 /* Project object */;
+}

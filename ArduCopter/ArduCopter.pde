@@ -194,6 +194,9 @@ static void print_flight_mode(AP_HAL::BetterStream *port, uint8_t mode);
 static DataFlash_APM2 DataFlash;
 #elif CONFIG_HAL_BOARD == HAL_BOARD_APM1
 static DataFlash_APM1 DataFlash;
+#elif CONFIG_HAL_BOARD == HAL_BOARD_MPNG
+#include <MySD.h>
+static DataFlash_SD DataFlash;
 #elif CONFIG_HAL_BOARD == HAL_BOARD_AVR_SITL
 static DataFlash_File DataFlash("logs");
 //static DataFlash_SITL DataFlash;
@@ -239,6 +242,8 @@ static AP_ADC_ADS7844 adc;
 
  #if CONFIG_IMU_TYPE == CONFIG_IMU_MPU6000
 static AP_InertialSensor_MPU6000 ins;
+#elif CONFIG_IMU_TYPE == CONFIG_IMU_MPU6000_I2C
+static AP_InertialSensor_MPU6000_I2C ins;
 #elif CONFIG_IMU_TYPE == CONFIG_IMU_OILPAN
 static AP_InertialSensor_Oilpan ins(&adc);
 #elif CONFIG_IMU_TYPE == CONFIG_IMU_SITL

@@ -11,11 +11,13 @@
    maximum number of INS instances available on this platform. If more
    than 1 then redundent sensors may be available
  */
+
 #if CONFIG_HAL_BOARD == HAL_BOARD_PX4
-#define INS_MAX_INSTANCES 2
+    #define INS_MAX_INSTANCES 2
 #else
-#define INS_MAX_INSTANCES 1
+    #define INS_MAX_INSTANCES 1
 #endif
+
 
 #include <stdint.h>
 #include <AP_HAL.h>
@@ -190,6 +192,9 @@ protected:
     // save parameters to eeprom
     void  _save_parameters();
 
+    // product id
+    AP_Int16 _product_id;
+
     // Most recent accelerometer reading obtained by ::update
     Vector3f _accel[INS_MAX_INSTANCES];
 
@@ -199,14 +204,12 @@ protected:
     // Most recent gyro reading obtained by ::update
     Vector3f _gyro[INS_MAX_INSTANCES];
 
-    // product id
-    AP_Int16 _product_id;
-
     // accelerometer scaling and offsets
     AP_Vector3f             _accel_scale[INS_MAX_INSTANCES];
     AP_Vector3f             _accel_offset[INS_MAX_INSTANCES];
     AP_Vector3f             _gyro_offset[INS_MAX_INSTANCES];
 
+    
     // filtering frequency (0 means default)
     AP_Int8                 _mpu6000_filter;
 
@@ -216,7 +219,9 @@ protected:
 
 #include "AP_InertialSensor_Oilpan.h"
 #include "AP_InertialSensor_MPU6000.h"
+#include "AP_InertialSensor_MPU6000_I2C.h"
 #include "AP_InertialSensor_HIL.h"
+#include "AP_InertialSensor_ITG3200.h"
 #include "AP_InertialSensor_PX4.h"
 #include "AP_InertialSensor_UserInteract_Stream.h"
 #include "AP_InertialSensor_UserInteract_MAVLink.h"

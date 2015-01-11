@@ -244,5 +244,6 @@ struct PACKED log_BARO {
 
 #include "DataFlash_Block.h"
 #include "DataFlash_File.h"
+#include "DataFlash_SD.h"
 
 #endif
