@@ -87,6 +87,7 @@
 // AP_HAL
 #include <AP_HAL.h>
 #include <AP_HAL_AVR.h>
+#include <AP_HAL_MPNG.h>
 #include <AP_HAL_AVR_SITL.h>
 #include <AP_HAL_PX4.h>
 #include <AP_HAL_FLYMAPLE.h>
