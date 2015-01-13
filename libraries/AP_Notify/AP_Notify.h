@@ -67,6 +67,9 @@ private:
     ToshibaLED_I2C toshibaled;
     ExternalLED externalled;
     Buzzer buzzer;
+#elif CONFIG_HAL_BOARD == HAL_BOARD_MPNG
+    ExternalLED externalled;
+    Buzzer buzzer;    
 #else
     ToshibaLED_I2C toshibaled;
 #endif
