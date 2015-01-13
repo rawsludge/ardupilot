@@ -39,6 +39,7 @@ public:
     };
 
     virtual void set_bus_speed(enum bus_speed speed) {}
+    virtual void set_speed(uint8_t speed) { }
     
 };
 

@@ -10,7 +10,7 @@
 // Functions called from the top-level menu
 static int8_t   process_logs(uint8_t argc, const Menu::arg *argv);      // in Log.pde
 static int8_t   setup_mode(uint8_t argc, const Menu::arg *argv);        // in setup.pde
-static int8_t   test_mode(uint8_t argc, const Menu::arg *argv);         // in test.cpp
+static int8_t   test_mode(uint8_t argc, const Menu::arg *argv);         // in test.cppinit_ardupilot
 static int8_t   reboot_board(uint8_t argc, const Menu::arg *argv);
 
 // This is the help function
@@ -100,7 +100,7 @@ static void init_ardupilot()
 #if GPS_PROTOCOL != GPS_PROTOCOL_IMU
     // standard gps running. Note that we need a 256 byte buffer for some
     // GPS types (eg. UBLOX)
-    hal.uartB->begin(38400, 256, 16);
+    hal.uartB->begin(SERIAL2_BAUD, 256, 16);
 #endif
 
     cliSerial->printf_P(PSTR("\n\nInit " FIRMWARE_STRING
@@ -119,6 +119,7 @@ static void init_ardupilot()
     // Report firmware version code expect on console (check of actual EEPROM format version is done in load_parameters function)
     //
     report_version();
+    
 
     // load parameters from EEPROM
     load_parameters();
@@ -178,7 +179,6 @@ static void init_ardupilot()
     // port with SERIAL0_BAUD. check_usb_mux() fixes this if need be.
     ap.usb_connected = true;
     check_usb_mux();
-
 #if CONFIG_HAL_BOARD != HAL_BOARD_APM2
     // we have a 2nd serial port for telemetry on all boards except
     // APM2. We actually do have one on APM2 but it isn't necessary as
@@ -190,7 +190,7 @@ static void init_ardupilot()
     if (hal.uartD != NULL) {
         hal.uartD->begin(map_baudrate(g.serial2_baud, SERIAL2_BAUD), 128, 128);
         gcs[2].init(hal.uartD);
-    }
+    }    
 #endif
 
     // identify ourselves correctly with the ground station
@@ -208,9 +208,9 @@ static void init_ardupilot()
         gcs[0].reset_cli_timeout();
     }
 #endif
-
     init_rc_in();               // sets up rc channels from radio
     init_rc_out();              // sets up motors and output to escs
+
 
     /*
      *  setup the 'main loop is dead' check. Note that this relies on

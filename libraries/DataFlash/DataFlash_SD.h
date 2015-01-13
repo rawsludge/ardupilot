@@ -13,15 +13,15 @@ class DataFlash_SD : public DataFlash_Class
 private:
     //Methods
     volatile bool 	_initialised;
-    int8_t          _get_file_count();
+    uint16_t          _get_file_count();
     File            _currentFile;
+    void            getFileName(uint16_t fileNum, char *buffer, int16_t size);
 
 public:
 	//initialize
 	DataFlash_SD();
 	
     void        Init(const struct LogStructure *structure, uint8_t num_types);
-    //void        ReadManufacturerID();
     bool        CardInserted();
     bool 		NeedErase(void);
     void 		EraseAll();
@@ -35,9 +35,6 @@ public:
                                AP_HAL::BetterStream *port);
     int16_t     get_log_data(uint16_t, uint16_t, uint32_t, uint16_t, uint8_t*);
     void        get_log_info(uint16_t, uint32_t&, uint32_t&);
-    /*
-    void 		LogReadProcess(uint16_t, uint16_t, uint16_t, uint8_t, const LogStructure*, void (*)(AP_HAL::BetterStream*, uint8_t), AP_HAL::BetterStream*);
-     */
     void 		DumpPageInfo(AP_HAL::BetterStream*);
     void 		ShowDeviceInfo(AP_HAL::BetterStream*);
 	void 		ListAvailableLogs(AP_HAL::BetterStream*);

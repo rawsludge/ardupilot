@@ -25,6 +25,8 @@ DataFlash_SD::DataFlash_SD() :
 void DataFlash_SD::Init(const struct LogStructure *structure, uint8_t num_types)
 {
     if( _initialised ) return ;
+    DataFlash_Class::Init(structure, num_types);
+    
     if( !SD.begin() )
     {
         hal.console->println_P(PSTR("DataFlash_SD not initialized. error\n"));
@@ -62,12 +64,20 @@ void DataFlash_SD::WriteBlock(const void *pBuffer, uint16_t size)
 
 uint16_t  DataFlash_SD::find_last_log()
 {
-	return _get_file_count();
+	return _get_file_count()-1;
 }
 
-void DataFlash_SD::get_log_boundaries(uint16_t log_num, uint16_t & start_page, uint16_t & end_page)
+void DataFlash_SD::get_log_boundaries(uint16_t log_num, uint16_t &start_page, uint16_t &end_page)
 {
-
+    if( !_initialised ) return;
+    char buffer[13];
+    getFileName(log_num, buffer, sizeof(buffer));
+    if( SD.exists(buffer)) {
+        File file = SD.open(buffer, O_READ);
+        start_page = 0;
+        end_page = file.size();
+        file.close();
+    }
 }
 
 uint16_t DataFlash_SD::get_num_logs(void)
@@ -122,15 +132,12 @@ uint16_t DataFlash_SD::start_new_log(void)
 {
     if( !_initialised) return 0;
     
-    char buffer[13];
-    memset(buffer, 13, 0);
-    
     if( _currentFile )
         _currentFile.close();
 
     uint8_t log_num = _get_file_count();
-    hal.util->snprintf(buffer, 12, "%08u.bin", (unsigned)log_num);
-    buffer[12]='\0';
+    char buffer[13];
+    getFileName(log_num, buffer, sizeof(buffer));
     
     _currentFile = SD.open(buffer, O_CREAT|O_WRITE|O_APPEND);
     if( !_currentFile )
@@ -147,17 +154,30 @@ void DataFlash_SD::ReadBlock(void *pkt, uint16_t size)
         hal.console->println_P(PSTR("Read failed"));
 }
 
+void DataFlash_SD::get_log_info(uint16_t log_num, uint32_t &size, uint32_t &time_utc)
+{
+    
+}
+
+int16_t DataFlash_SD::get_log_data(uint16_t log_num, uint16_t page, uint32_t offset, uint16_t len, uint8_t*)
+{
+
+    return 0;
+}
+
+
+
 /*
     private members
  */
 
-int8_t DataFlash_SD::_get_file_count()
+uint16_t DataFlash_SD::_get_file_count()
 {
     if( !_initialised) return 0;
 
     File dir = SD.open("/");
     dir.rewindDirectory();
-    int8_t fileCount = 1;
+    uint16_t fileCount = 1;
     
     while(true)
     {
@@ -170,6 +190,15 @@ int8_t DataFlash_SD::_get_file_count()
     dir.close();
         
     return fileCount;
+}
+
+void DataFlash_SD::getFileName(uint16_t fileNum, char *buffer, int16_t size)
+{
+    //char buffer[13];
+    memset(buffer, size, 0);
+    hal.util->snprintf(buffer, 12, "%08u.bin", fileNum);
+    buffer[size-1]='\0';
+    //return buffer;
 }
 
 
