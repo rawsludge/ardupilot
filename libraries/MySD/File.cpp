@@ -119,6 +119,12 @@ int File::read() {
     return -1;
 }
 
+void File::remove()
+{
+    if(_file)
+        _file->remove();
+}
+
 // buffered read for more efficient, high speed reading
 int File::read(void *buf, uint16_t nbyte) {
     if (_file)

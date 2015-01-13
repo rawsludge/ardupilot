@@ -16,6 +16,8 @@ private:
     uint16_t          _get_file_count();
     File            _currentFile;
     void            getFileName(uint16_t fileNum, char *buffer, int16_t size);
+    void            _print_log_formats(AP_HAL::BetterStream *port);
+
 
 public:
 	//initialize

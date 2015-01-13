@@ -48,6 +48,7 @@ public:
     virtual int peek();
     virtual int available();
     virtual void flush();
+    virtual void remove();
     int read(void *buf, uint16_t nbyte);
     uint8_t seek(uint32_t pos);
     uint32_t position();
