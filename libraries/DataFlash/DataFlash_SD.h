@@ -42,7 +42,7 @@ public:
 	void 		ListAvailableLogs(AP_HAL::BetterStream*);
 	uint16_t 	start_new_log();
 	void 		ReadBlock(void*, uint16_t);
-
+	void		EnableWrites(bool enable);
 };
 
 #endif

@@ -54,7 +54,9 @@ bool DataFlash_SD::NeedErase(void)
 void DataFlash_SD::EraseAll()
 {
     if( _currentFile )
+	{
         _currentFile.close();
+	}
     
     File dir = SD.open("/");
     dir.rewindDirectory();
@@ -79,6 +81,19 @@ void DataFlash_SD::WriteBlock(const void *pBuffer, uint16_t size)
     //_currentFile.flush();
 }
 
+void DataFlash_SD::EnableWrites(bool enable)
+{
+	if( enable )
+	{
+		if( !_currentFile )
+			StartNewLog();
+	}
+	else 
+		_currentFile.close();
+	DataFlash_Class::EnableWrites(enable);
+}
+
+
 uint16_t  DataFlash_SD::find_last_log()
 {
 	return _get_file_count()-1;
@@ -99,7 +114,7 @@ void DataFlash_SD::get_log_boundaries(uint16_t log_num, uint16_t &start_page, ui
 
 uint16_t DataFlash_SD::get_num_logs(void)
 {
-	return _get_file_count();
+	return _get_file_count() - 1;
 }
 
 void DataFlash_SD::LogReadProcess(uint16_t log_num,

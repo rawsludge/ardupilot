@@ -3,7 +3,7 @@
 #define ARM_DELAY               20  // called at 10hz so 2 seconds
 #define DISARM_DELAY            20  // called at 10hz so 2 seconds
 #define AUTO_TRIM_DELAY         100 // called at 10hz so 10 seconds
-#define AUTO_DISARMING_DELAY    15  // called at 1hz so 15 seconds
+#define AUTO_DISARMING_DELAY    30  // called at 1hz so 15 seconds
 
 // arm_motors_check - checks for pilot input to arm or disarm the copter
 // called at 10hz
