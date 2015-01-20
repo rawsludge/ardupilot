@@ -204,27 +204,34 @@ void DataFlash_SD::ReadBlock(void *pkt, uint16_t size)
 
 void DataFlash_SD::get_log_boundaries(uint16_t log_num, uint16_t &start_page, uint16_t &end_page)
 {
+    hal.console->println_P(PSTR("get_log_boundaries 1"));
     if( !_initialised ) return;
-	if( !_readFile )
-	{
-		char buffer[13];
-		getFileName(log_num, buffer, sizeof(buffer));
-		_readFile = SD.open(buffer, O_READ);
-	}
+    if( _readFile )
+        _readFile.close();
+    char buffer[13];
+    getFileName(log_num, buffer, sizeof(buffer));
+    hal.console->println_P(PSTR("get_log_boundaries 2"));
+    _readFile = SD.open(buffer, O_READ);
+    _readFile.seek(0);
+    hal.console->println_P(PSTR("get_log_boundaries 3"));
+    
     start_page = 0;
     end_page = _readFile.size(); // file.size();
+    hal.console->println_P(PSTR("get_log_boundaries 4"));
     //file.close();
 }
 
 void DataFlash_SD::get_log_info(uint16_t log_num, uint32_t &size, uint32_t &time_utc)
 {
-	if( _readFile )
-		_readFile.close();
+    hal.console->println_P(PSTR("get_log_info 1"));
     char buffer[13];
     getFileName(log_num, buffer, sizeof(buffer));
-    _readFile = SD.open(buffer, O_READ);
-    size = _readFile.size();
-    //file.close();    
+    hal.console->println_P(PSTR("get_log_info 2"));
+    File file = SD.open(buffer, O_READ);
+    hal.console->println_P(PSTR("get_log_info 3"));
+    size = file.size();
+    hal.console->println_P(PSTR("get_log_info 4"));
+    file.close();
 }
 
 int16_t DataFlash_SD::get_log_data(uint16_t log_num, uint16_t page, uint32_t offset, uint16_t len, uint8_t*buf)
@@ -232,12 +239,14 @@ int16_t DataFlash_SD::get_log_data(uint16_t log_num, uint16_t page, uint32_t off
 	//char buffer[13];
 	//getFileName(log_num, buffer, sizeof(buffer));
 	//File file = SD.open(buffer, O_READ);
+    hal.console->println_P(PSTR("get_log_data 1"));
 	if( _readFile )
 	{
-    //file.seek(offset);
-    int size = _readFile.read(buf, len);
-    //file.close();
-    return size;
+        int size = _readFile.read(buf, len);
+        hal.console->printf_P(PSTR("get_log_data 2 size:%d"), size);
+        if( size < len )
+            _readFile.close();
+        return size;
 	}
 	return 0;
 }
